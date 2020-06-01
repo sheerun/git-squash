@@ -8,6 +8,12 @@ Useful if you don't have permission to perform merges or you don't use GitHub.
 
 ## Installation
 
+With [Homebrew](https://brew.sh/) on MacOS and Linux:
+
+```
+brew install sheerun/git-squash/git-squash
+```
+
 With `curl` on MacOS and Linux:
 
 ```
