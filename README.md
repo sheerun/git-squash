@@ -14,7 +14,7 @@ With [Homebrew](https://brew.sh/) on MacOS and Linux:
 brew install sheerun/git-squash/git-squash
 ```
 
-With `curl` on MacOS and Linux:
+With `curl` on MacOS and Linux, including Windows Subsystem for Linux:
 
 ```
 curl https://raw.githubusercontent.com/sheerun/git-squash/master/git-squash > /usr/local/bin/git-squash && chmod a+x /usr/local/bin/git-squash
