@@ -1,0 +1,51 @@
+#!/bin/bash
+
+set -e
+
+CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+TEMP_BRANCH="temp$(date +%s)"
+
+if [ "$1" == "" ]; then
+  echo "Squashes all commits just like GitHub squash merge"
+  echo ""
+  echo "Usage: git squash <branch>"
+  echo ""
+  echo "Examples"
+  echo " - git squash master"
+  exit 1
+fi
+
+if [ "$(git status -s)" != "" ]; then
+  echo "Please commit all changes before squashing"
+  exit 1
+fi
+
+if ! git show-ref "$1" > /dev/null; then
+  echo "Branch $1 does not exist"
+  exit 1
+fi
+
+FIRST_COMMIT_ID=$(git log master.. --no-merges --pretty=format:%h | tail -1)
+
+if [ "$FIRST_COMMIT_ID" == "" ]; then
+  echo "There are no changes to be squashed"
+  exit 1
+fi
+
+git checkout -q -b "$TEMP_BRANCH" "$1"
+
+function finish {
+  git checkout -q --force "$CURRENT_BRANCH"
+  git branch -q -D "$TEMP_BRANCH"
+}
+trap finish EXIT
+
+git merge --squash "$CURRENT_BRANCH"
+
+git add -A
+
+git commit -q -c "$FIRST_COMMIT_ID"
+
+git checkout -q "$CURRENT_BRANCH"
+
+git reset -q --hard "$TEMP_BRANCH"
