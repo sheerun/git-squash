@@ -1,4 +1,4 @@
-<img align="right" src="https://i.imgur.com/4iAqPLR.jpg">
+<img align="right" height="250" src="https://i.imgur.com/4iAqPLR.jpg">
 
 # git squash 
 
