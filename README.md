@@ -1,6 +1,6 @@
 <img align="right" height="250" src="https://i.imgur.com/4iAqPLR.jpg">
 
-# git squash 
+# git squash [![Maintenance](https://img.shields.io/maintenance/yes/2020.svg?maxAge=2592000)]()
 
 Locally squash commits on a branch without resolving any conflicts.
 
