@@ -2,9 +2,9 @@
 
 # git squash 
 
-Squash commits on branch just like GitHub's "Squash and merge".
+Squash commits on a branch without resolving any conflicts
 
-Useful if you don't have permission to perform merges or you don't use GitHub.
+It works just like GitHub's "Squash and merge" or GitLab's "Squash commits".
 
 ## Installation
 
