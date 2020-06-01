@@ -2,7 +2,7 @@
 
 # git squash 
 
-Squash commits on a branch without resolving any conflicts
+Locally squash commits on a branch without resolving any conflicts.
 
 It works just like GitHub's "Squash and merge" or GitLab's "Squash commits".
 
