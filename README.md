@@ -23,6 +23,9 @@ curl https://raw.githubusercontent.com/sheerun/git-squash/master/git-squash > /u
 ## Usage
 
 ```sh
+# This tool requires that target branch is mergable to current one
+# The easiest way to ensure it is to merge it and resolve any conflicts if any
+git merge master
 # Squash all changes on current branch that happened since master branch
 git squash master
 ```
