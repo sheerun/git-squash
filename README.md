@@ -16,8 +16,12 @@ brew install sheerun/git-squash/git-squash
 
 With `curl` on MacOS and Linux, including Windows Subsystem for Linux:
 
-```
+```bash
+## If you are a root user
 curl https://raw.githubusercontent.com/sheerun/git-squash/master/git-squash > /usr/local/bin/git-squash && chmod a+x /usr/local/bin/git-squash
+
+## Or if you are a non-root but sudoer user:
+sudo sh -c 'curl https://raw.githubusercontent.com/sheerun/git-squash/master/git-squash > /usr/local/bin/git-squash && chmod a+x /usr/local/bin/git-squash'
 ```
 
 ## Usage
