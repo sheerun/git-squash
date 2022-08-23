@@ -4,8 +4,10 @@ set -e
 
 CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 TEMP_BRANCH="temp$(date +%s)"
+INDEX=0
+BRANCHES=()
 
-if [ "$1" == "" ]; then
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
   echo "Squashes all commits just like GitHub squash merge"
   echo ""
   echo "Usage: git squash <branch>"
@@ -20,19 +22,32 @@ if [ "$(git status -s -u no)" != "" ]; then
   exit 1
 fi
 
-if ! git show-ref "$1" > /dev/null; then
-  echo "Branch $1 does not exist"
-  exit 1
+if [ "$1" == "" ]; then
+  for i in $(git for-each-ref --format='%(refname:short)' refs/heads)
+  do
+	echo "$INDEX $i"
+	INDEX=$(expr $INDEX + 1)
+	BRANCHES+=("$i")
+  done
+  read -p "select branch:" $BRANCH_ID
+  SELECTED_BRANCH="${BRANCHES[$BRANCH_ID]}"
+  echo ""
+  echo "selected branch: ${SELECTED_BRANCH}"
+  if ! git show-ref "$SELECTED_BRANCH" > /dev/null; then
+	echo "Branch $1 does not exist"
+    exit 1
+  fi
+
 fi
 
-FIRST_COMMIT_ID=$(git log $1.. --no-merges --pretty=format:%h | tail -1)
+FIRST_COMMIT_ID=$(git log $SELECTED_BRANCH.. --no-merges --pretty=format:%h | tail -1)
 
 if [ "$FIRST_COMMIT_ID" == "" ]; then
   echo "There are no changes to be squashed"
   exit 1
 fi
 
-git checkout -q -b "$TEMP_BRANCH" "$1"
+git checkout -q -b "$TEMP_BRANCH" "$SELECTED_BRANCH"
 
 function finish {
   git checkout -q --force "$CURRENT_BRANCH"
