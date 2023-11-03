@@ -15,7 +15,7 @@ if [ "$1" == "" ]; then
   exit 1
 fi
 
-if [ "$(git status -s -u no)" != "" ]; then
+if [ "$(git status -s -uno)" != "" ]; then
   echo "Please commit all changes before squashing"
   exit 1
 fi
